@@ -1,0 +1,27 @@
+positive = ['good', 'clean', 'fast', 'helpful']
+negative = ['bad', 'dirty', 'slow', 'smoke']
+negators = ['not', 'never', 'no']
+
+def sentiment(text):
+    words = text.lower().replace('.', '').split()
+    score = 0
+
+    for i, w in enumerate(words):
+        if w in positive:
+            v = 1
+        elif w in negative:
+            v = -1
+        else:
+            v = 0
+
+        if i > 0 and words[i-1] in negators:
+            v = -v
+
+        score += v
+
+    if score > 0:
+        return "Positive"
+    elif score < 0:
+        return "Negative"
+
+    return "Neutral"
